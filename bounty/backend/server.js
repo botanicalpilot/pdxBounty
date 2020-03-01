@@ -20,6 +20,12 @@ connection.catch(error => {
     console.log('Error: ', error);
 })
 
+const plantsRouter = require('./routes/plants');
+const usersRouter = require('./routes/users');
+app.use('/plants', plantsRouter);
+app.use('/users', usersRouter);
+
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
