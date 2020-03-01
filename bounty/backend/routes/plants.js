@@ -7,10 +7,12 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// make route with add, make variables for database. 
+// All fields  below are required, regardless of the model. 
 router.route('/add').post((req, res) => {
         const xLong = Number(req.body.xLong);
         const yLat = Number(req.body.yLat);
-        const streetTreeId = req.body.streetTreeId;
+        const streetTreeId = Number(req.body.streetTreeId);
         const species = req.body.species;
         const DBH = Number(req.body.DBH);
         const siteDeveloped = req.body.siteDeveloped;
@@ -78,7 +80,7 @@ router.route('/update/:id').post((req, res) => {
     .then( plant => {
         plant.xLong = Number(req.body.xLong);
         plant.yLat = Number(req.body.yLat);
-        plant.streetTreeId = req.body.streetTreeId;
+        plant.streetTreeId = Number(req.body.streetTreeId);
         plant.species = req.body.species;
         plant.DBH = Number(req.body.DBH);
         plant.siteDeveloped = req.body.siteDeveloped;
