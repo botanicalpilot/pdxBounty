@@ -1,56 +1,52 @@
-import ReactDom from 'react-dom';
-import React from 'react';
-import 'ol/ol.css';
-import Map from "ol/Map";
-import View from "ol/View";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import mapboxgl from 'mapbox-gl';
+
+
+
+mapboxgl.accessToken = 
+
 
 
 class PlantsMap extends React.Component{
+    mapRef = React.createRef();
 
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            mapClassName: "plants-map"
-        }
+            lng: 5,
+            lat: 34,
+            zoom: 1.5
+        };
     }
 
     componentDidMount() {
+        const { lng, lat, zoom} = this.state;
 
-        var map = new Map({
-            target: "mapContainer", 
-            layers: [],
-            view: new View({
-                center: [-11718716.28195593, 4869217.172379018],
-                zoom: 13,
-            })
-             
+        const map = new mapboxgl.Map({
+            container: this.mapRef.current,
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [lng, lat],
+            zoom
         });
 
-        // this.setState({
-        //     map: map,
-        // });
+        map.on('move', () => {
+            const {lng, lat} = map.getCenter();
 
-        window.map = map;
-
-        this.initialLoad = false;
-        //window.emitter.emit("mapLoaded");
-        window.map.once("rendercomplete", event => {
-        if (!this.initialLoad) {
-            window.emitter.emit("mapLoaded");
-            this.initialLoad = true;
-        }
+            this.setState({
+                lng: lng.toFixed(4),
+                lat:lat.toFixed(4),
+                zoom: map.getZoom().toFixed(2)
+            });
         });
-        
-
     }
 
     render() {
+        const { lng, lat, zoom } = this.state;
+
         
-        return (
-            <div ref="mapContainer"> this is the map container </div>
-        );
+        return <div ref={this.mapRef} className="absolute top right left bottom" />;
     }
 
 }
-
 export default PlantsMap;
