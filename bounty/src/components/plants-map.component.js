@@ -1,65 +1,56 @@
 import ReactDom from 'react-dom';
 import React from 'react';
+import 'ol/ol.css';
+import Map from "ol/Map";
+import View from "ol/View";
 
-// var ol = require('openlayers');
-// require('openlayers/css/ol.css');
 
 class PlantsMap extends React.Component{
 
-    // componentDidMount() {
-    //     let featuresLater = new ol.layer.Vector({
-    //         source: new ol.source.Vector({
-    //             features:[]
-    //         })
-    //     });
+    constructor(props) {
+        super(props);
+        this.state = {
+            mapClassName: "plants-map"
+        }
+    }
 
-    //     let map = new ol.Map({
-    //         target: this.refs.mapContainer, 
-    //         layers: [
-    //             new ol.layer.Tile({
-    //                 source: new ol.source.OSM()
-    //             }),
-    //             featuresLayer
-    //         ],
-    //         view: new ol.View({
-    //             center: [-11718716.28195593, 4869217.172379018],
-    //             zoom: 13,
-    //         })
-    //     });
+    componentDidMount() {
 
-    //     map.on('click', this.handleMapClick.bind(this));
+        var map = new Map({
+            target: "mapContainer", 
+            layers: [],
+            view: new View({
+                center: [-11718716.28195593, 4869217.172379018],
+                zoom: 13,
+            })
+             
+        });
 
-    //     this.setState({
-    //         map: map,
-    //         featuresLater: featuresLayer
-    //     });
+        // this.setState({
+        //     map: map,
+        // });
 
-    // }
+        window.map = map;
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     this.state.featuresLater.setSource(
-    //         new ol.source.Vector({
-    //             features: this.props.routes
-    //         })
-    //     );
-    // }
+        this.initialLoad = false;
+        //window.emitter.emit("mapLoaded");
+        window.map.once("rendercomplete", event => {
+        if (!this.initialLoad) {
+            window.emitter.emit("mapLoaded");
+            this.initialLoad = true;
+        }
+        });
+        
 
-    // handleMapClick(event) {
-    //     let wktWriter = new ol.format.WKT();
-    //     let clickedCoordinate = this.state.map.getCoordinateFromPixel(event.pixel);
-    //     let clickedPointGeom = new ol.geom.Point( clickedCoordinate );
-    //     let clickedPointWkt = wktWriter.writeGeometery( clickedPointGeom );
-
-    //     Actions.setRoutingCoord( clickedPointWkt );
-
-    // }
+    }
 
     render() {
+        
         return (
-            <div ref="mapContainer"> </div>
+            <div ref="mapContainer"> this is the map container </div>
         );
     }
 
 }
 
-module.exports = PlantsMap;
+export default PlantsMap;
