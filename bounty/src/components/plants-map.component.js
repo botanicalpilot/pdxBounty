@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 
 
+// add token here to load map. Avoiding adding key until auth is setup
+mapboxgl.accessToken = ''
 
-mapboxgl.accessToken = 
+console.log(process.env.MAP_TOKEN)
 
 
 
