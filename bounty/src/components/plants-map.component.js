@@ -1,53 +1,59 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import mapboxgl from 'mapbox-gl';
+// import ReactDOM from 'react-dom';
+// import mapboxgl from 'mapbox-gl';
 
 
-// add token here to load map. Avoiding adding key until auth is setup
-mapboxgl.accessToken = ''
+// // add token here to load map. Avoiding adding key until auth is setup
+// mapboxgl.accessToken = ''
 
-console.log(process.env.MAP_TOKEN)
+// console.log(process.env.MAP_TOKEN)
 
 
 
 class PlantsMap extends React.Component{
-    mapRef = React.createRef();
+//     mapRef = React.createRef();
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            lng: 5,
-            lat: 34,
-            zoom: 1.5
-        };
-    }
+//     constructor(props: Props) {
+//         super(props);
+//         this.state = {
+//             lng: 5,
+//             lat: 34,
+//             zoom: 1.5
+//         };
+//     }
 
-    componentDidMount() {
-        const { lng, lat, zoom} = this.state;
+//     componentDidMount() {
+//         const { lng, lat, zoom} = this.state;
 
-        const map = new mapboxgl.Map({
-            container: this.mapRef.current,
-            style: 'mapbox://styles/mapbox/streets-v9',
-            center: [lng, lat],
-            zoom
-        });
+//         const map = new mapboxgl.Map({
+//             container: this.mapRef.current,
+//             style: 'mapbox://styles/mapbox/streets-v9',
+//             center: [lng, lat],
+//             zoom
+//         });
 
-        map.on('move', () => {
-            const {lng, lat} = map.getCenter();
+//         map.on('move', () => {
+//             const {lng, lat} = map.getCenter();
 
-            this.setState({
-                lng: lng.toFixed(4),
-                lat:lat.toFixed(4),
-                zoom: map.getZoom().toFixed(2)
-            });
-        });
-    }
+//             this.setState({
+//                 lng: lng.toFixed(4),
+//                 lat:lat.toFixed(4),
+//                 zoom: map.getZoom().toFixed(2)
+//             });
+//         });
+//     }
 
     render() {
-        const { lng, lat, zoom } = this.state;
+        // const { lng, lat, zoom } = this.state;
 
         
-        return <div ref={this.mapRef} className="absolute top right left bottom" />;
+        return (
+            // <div ref={this.mapRef} className="absolute top right left bottom"></div>
+            <div>
+                <p>You on on the create user component</p>
+            </div>
+        ) 
+        
     }
 
 }
