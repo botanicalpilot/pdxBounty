@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Login extends Component{
     constructor() {
@@ -18,7 +18,6 @@ class Login extends Component{
     onSubmit = e => {
         e.preventDefault();
 
-        // get user input from state to send to db
         const userData = {
             email: this.state.email,
             password: this.state.password,

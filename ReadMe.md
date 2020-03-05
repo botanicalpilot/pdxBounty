@@ -15,6 +15,7 @@
 * MongoDB
 * ExpressJS
 * ReactJS
+* Redux
 * NodeJS
 * Python/Pandas(for data aggregation)
 
