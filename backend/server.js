@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const passport = require("passport");
+
+const users = require("./routes/users");
 
 require('dotenv').config();
 
@@ -34,10 +37,20 @@ connection.catch(error => {
     console.log('Error: ', error);
 })
 
+// passport Middleware
+app.use(passport.initialize());
+
+// configure passport
+require("./config/passport")(passport);
+
+// user routes
+app.use("/users", users);
+
+
 const plantsRouter = require('./routes/plants');
-const usersRouter = require('./routes/users');
+// const usersRouter = require('./routes/users');
 app.use('/plants', plantsRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 
 
 app.listen(port, () => {
