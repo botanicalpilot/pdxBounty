@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "bounty-install": "npm install --prefix bounty",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "bounty": "npm start --prefix bounty",
+    "dev": "concurrently \"npm run server\" \"npm run bounty\""
   },
   "keywords": [],
   "author": "",
