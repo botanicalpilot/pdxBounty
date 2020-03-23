@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 
 // configure the database
 const uri = require("./config/keys").ATLAS_URI;
+// const mapKey = require("./config/keys").Map_TOKEN;
 
 
 const port = process.env.PORT || 5000;
